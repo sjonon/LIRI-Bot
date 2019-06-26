@@ -49,3 +49,13 @@ movie-this mr nobody
 movie-this undefined
 movie-this the lost boys
 spotify-this-song people are strange
+movie-this the lost boys
+spotify-this-song people are strange
+spotify-this-song the sign ace of base
+concert-this modest mouse
+do-what-it-says undefined
+movie-this the lost boys
+do-what-it-says undefined
+concert-this modest mouse
+spotify-this-song people are strange
+spotify-this-song the sign ace of base

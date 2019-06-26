@@ -7,6 +7,9 @@ Each command entered is logged to a log.txt file for future reference using the 
 
 ### Using the app
 
+[![Liri Bot Demo](http://img.youtube.com/vi/KVlYa072yN0/0.jpg)](http://www.youtube.com/watch?v=KVlYa072yN0 "Liri Bot Demo")
+
+
 To use this app you'll simply need to follow a few steps:
 
 * To search for information on where a band is playing, type the following:
