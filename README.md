@@ -1,24 +1,37 @@
 # LIRI-Bot
 A command line node app that acts as a Language Interpretation and Recognition Interface
 
-Before You Begin
-1.	LIRI will search Spotify for songs, Bands in Town for concerts, and OMDB for movies.
-2.	Make a new GitHub repository called liri-node-app and clone it to your computer.
-3.	To retrieve the data that will power this app, you'll need to send requests using the axiospackage to the Bands in Town, Spotify and OMDB APIs. You'll find these Node packages crucial for your assignment.
-o	Node-Spotify-API
-o	Axios
-	You'll use Axios to grab data from the OMDB API and the Bands In Town API
-o	Moment
-o	DotEnv
-Submission Guide
-Create and use a standard GitHub repository. As this is a CLI App, it cannot be deployed to GitHub pages or Heroku. This time you'll need to include screenshots, a GIF, and/or a video showing us that you have the app working with no bugs. You can include these screenshots/GIFs or a link to a video in a README.md file.
-In order to meet the Employer Competitive standards and be ready to show your application to employers, the README.md file should meet the following criteria:
-1.	Clearly state the problem the app is trying to solve (i.e. what is it doing and why)
-2.	Give a high-level overview of how the app is organized
-3.	Give start-to-finish instructions on how to run the app
-4.	Include screenshots, gifs or videos of the app functioning
-5.	Contain a link to a deployed version of the app
-6.	Clearly list the technologies used in the app
-7.	State your role in the app development
-Because screenshots (and well-written READMEs) are extremely important in the context of GitHub, this will be part of the grading in this assignment.
-If you haven't written a markdown file yet, click here for a rundown, or just take a look at the raw file of these instructions.
+This app allows you to search for where your favorite bands are playing as well as find out key information on songs and movies.  All from the comfort of your Terminal.
+
+Each command entered is logged to a log.txt file for future reference using the fs.appendFile method.
+
+### Using the app
+
+To use this app you'll simply need to follow a few steps:
+
+* To search for information on where a band is playing, type the following:
+
+        node liri.js concert-this "name of the band in quotation marks"
+
+* To search for information on a song, type the following:
+
+        node liri.js spotify-this-song "name of the song in quotation marks"
+
+* To search for information on a movie, type the following:
+
+        node liri.js movie-this "name of the movie in quotation marks"
+
+* To search for items that are listed in the random.txt file, simply type:
+    
+        node liri.js do-what-it-says
+
+### Technologies used
+* node js
+* axios
+* chalk
+* dotenv
+* moment
+* node-spotify-api
+
+### Developer Information
+Developed by Sylvia Jonon in Austin, TX.

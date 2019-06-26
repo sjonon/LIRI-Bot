@@ -1,4 +1,4 @@
-console.log(process.argv);
+// console.log(process.argv);
 require("dotenv").config();
 var Spotify = require("node-spotify-api");
 var axios = require("axios");
@@ -33,10 +33,11 @@ switch (action) {
         band();
         break;
     case "movie-this":
-        if (query === undefined) {
+        if (process.argv.length <3){
+            query = "mr nobody";
+            console.log(movieUrl);
             console.log("Try entering the name of a movie in 'quotation marks' to search for a particular movie. Here's 'Mr. Nobody' to get you started.");
             console.log("\n");
-            query = "mr nobody";
             movie();
             break;
         } else {
@@ -54,10 +55,11 @@ switch (action) {
 function band() {
     axios.get(bandUrl).then(function (response) {
         // console.log(response.data[0]);
-        console.log(chalk.blue("This is where " + query + " will be playing:"))
-        console.log(chalk.yellow("Venue: " + response.data[0].venue.name));
-        console.log(chalk.yellow("Location: " + response.data[0].venue.city + ", " + response.data[0].venue.region));
-        console.log(chalk.green("Date: " + moment(response.data[0].datetime).format("MM/DD/YYYY hh:mma")));
+        console.log(chalk.blue("This is where ") + chalk.magenta.bold(query) +chalk.blue( " will be playing:"));
+        console.log(chalk.yellow("Venue: ")+ response.data[0].venue.name);
+        console.log(chalk.yellow("Location: ") + response.data[0].venue.city + ", " + response.data[0].venue.region);
+        console.log(chalk.green("Date: ") + moment(response.data[0].datetime).format("MM/DD/YYYY hh:mma"));
+        console.log("\n");
     })
 }
 //spotify-this-song '<song name here>': Show info on Artist, song name, preview link of song from spotify, album the song is from, if no song provided then program
@@ -68,11 +70,12 @@ function song() {
         if (err) {
             return console.log("Error occurred: " + err);
         }
-        console.log(JSON.stringify(data.tracks, null, 2));
-        console.log("Song: " + (data.tracks.items[0].name));
-        console.log("Artist: " + (data.tracks.items[0].artists[0].name));
-        console.log("Album: " + (data.tracks.items[0].album.name));
-        console.log("Song Preview: " + (data.tracks.items[0].preview_url));
+        // console.log(JSON.stringify(data.tracks, null, 2));
+        console.log(chalk.yellow("Song: ") + (data.tracks.items[0].name));
+        console.log(chalk.yellow("Artist: ") + (data.tracks.items[0].artists[0].name));
+        console.log(chalk.yellow("Album: ") + (data.tracks.items[0].album.name));
+        console.log(chalk.yellow("Song Preview: ") + (data.tracks.items[0].preview_url));
+        console.log("\n");
     });
 }
 
@@ -82,14 +85,19 @@ function movie() {
     axios.get(movieUrl).then(
         function (response) {
             // console.log(response.data);
-            console.log("Title: " + response.data.Title);
-            console.log("Year of release: " + response.data.Year);
-            console.log("IMDB Rating: " + response.data.Ratings[0].Value);
-            console.log("Rotten Tomatoes Rating: " + response.data.Ratings[1].Value);
-            console.log("Country: " + (response.data.Country));
-            console.log("Movie language: " + (response.data.Language));
-            console.log("Plot: " + response.data.Plot);
-            console.log("Actors: " + response.data.Actors);
+            console.log(chalk.bgWhite.magenta.bold("-------Movie Information-------"));
+            console.log(chalk.green("Title: ") + response.data.Title);
+            console.log(chalk.green("Year of release: ") + response.data.Year);
+            console.log(chalk.cyan("\n-------Ratings-------"));
+            console.log(chalk.green("IMDB Rating: ") + response.data.Ratings[0].Value);
+            console.log(chalk.green("Rotten Tomatoes Rating: ") + response.data.Ratings[1].Value);
+            console.log(chalk.cyan("\n-------Country and Language-------"));
+            console.log(chalk.green("Country: ") + (response.data.Country));
+            console.log(chalk.green("Movie language: ") + (response.data.Language));
+            console.log(chalk.cyan("\n-------Plot and Actors-------"));
+            console.log(chalk.green("Plot: \n") + response.data.Plot);
+            console.log(chalk.green("Actors: ") + response.data.Actors);
+            console.log("\n");
         })
 }
 
@@ -102,10 +110,8 @@ function random() {
             return console.log("There was an error.")
         }
         var randomTxt = data.split(",");
-        console.log(data.split(","));
         action = randomTxt[0];
         query = randomTxt[1];
-        console.log(action);
         if (action === "spotify-this-song"){
             song();
         }else if (action === "movie-this"){
@@ -118,11 +124,8 @@ function random() {
     })
 }
 
-
-//BONUSES:
-    //in addition to logging to the terminal, log to a file called log.txt
-    //make sure you append each command you run to the log.txt file.
-    //Do not overwrite your file each time you run a command
-
-//If time:
-    //incorporate Chalk and Chalk Animations node packages for styling
+fs.appendFile("log.txt", action + " " + query + "\n", function(err){
+    if(err){
+        console.log(err)
+    }
+})
