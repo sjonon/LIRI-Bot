@@ -33,7 +33,7 @@ switch (action) {
         band();
         break;
     case "movie-this":
-        if (process.argv.length <3){
+        if (query === undefined){
             query = "mr nobody";
             console.log(movieUrl);
             console.log("Try entering the name of a movie in 'quotation marks' to search for a particular movie. Here's 'Mr. Nobody' to get you started.");
